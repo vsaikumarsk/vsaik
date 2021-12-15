@@ -1,0 +1,114 @@
+List the department without any employees in it.
+ANS) SELECT job
+          FROM Emp
+          WHERE deptid NOT IN(SELECT Deptid 
+                                                    FROM Emp);
+List the name and job of the employees who does not report to anybody.
+ANS) SELECT Ename,Job
+          FROM Emp
+          WHERE COMM is Null
+Write a query that will give you the names and jobs of all employees in New York with a commission above 1000
+ANS) SELECT Ename ,jobs
+           FROM Emp
+           WHERE location='New York' and commission>1000;
+How many employees work in Chicago?
+ANS) SELECT COUNT(Ename)
+           FROM Emp
+           WHERE Location='chicago';
+Which employees work in Chicago?
+ANS)SELECT Ename
+         FROM Emp
+         WHERE Location='chicago';
+List the employees’ names and cities in which they work. Order the list by city
+ANS) SELECT Ename ,cities
+           FROM Emp
+           ORDER BY city;.
+Find the number of employees and number of departments.
+ANS) SELECT COUNT(Ename) as "number of employees" , COUNT(distinct job) as "number of departments"
+           FROM Emp;
+Display the employees who were hired before their managers.
+ANS) SELECT Ename
+          FROM Emp
+          WHERE Empno<MGR;
+Determine the number of managers without listing them.
+ANS) SELECT COUNT(job)
+          FROM Emp
+         WHERE Job='manager';
+Display the name and title of all employees who do not have a manager.
+ANS) SELECT Ename,job
+          FROM Emp
+          WHERE Mgr is null;
+Create a query to display the employee name and department number for employee SMITH.
+ANS) SELECT Ename,Deptno
+           FROM Emp
+           WHERE Ename='SMITH';
+Display the salesmen who are not in Boston
+ans) SELECT Ename
+         FROM emp 
+         INNER JOIN on Dept
+         WHERE Job='salesman' and Location not in ('Boston');
+List the details of the employees along with their location
+ANS) SELECT emp.empno,emp.ename,emp.job,emp.mgr,emp.hiredate,emp.sal,emp.comm,emp.deptno,Dept.loc 
+          FROM Emp 
+          INNER JOIN Dept on emp.Deptno=Dept.Deptno;
+List the salesmen who are drawing salary less than Miller
+ANS) SELECT Ename
+          FROM Emp
+          WHERE Job='salesman' and sal<(
+                                                                     SELECT sal
+                                                                      FROM Emp
+                                                                      WHERE Ename='Miller');
+Display the details of the employee working in Chicago
+ANS) SELECT * from emp
+          WHERE deptno=(SELECT deptno
+                                     FROM dept  
+		WHERE loc='chicago');
+           
+Find the names of all employees whose salaries are greater than the minimum salary for the Manager
+ANS) SELECT * 
+          FROM Emp
+          WHERE sal>(SELECT MIN(Sal)
+                                   FROM emp
+                                   WHERE Job='manager');
+Select the last name and job id from all employees whose department id is equal to Accounting.
+ans)SELECT last_name,job id
+        FROM Emp
+        WHERE Deptid=(select deptid
+                                        from dept
+                                        where department='manager');
+Display those emp who are working as manager
+ANS) SELECT Ename
+           FROM Emp
+           WHERE job='manager';
+write a subquery using case statement to display non sales if department is not sales
+If salary of an employee is more than 1000, then display salary otherwise display 1000
+ANS)SELECT Job,Sal
+         CASE 
+                   WHEN Job!='sales'
+                  THEN 'nonsales'
+                  WHEN Sal>1000
+                  THEN 1000
+                   ELSE 'Null'
+                   END
+        FROM Emp;
+Display salary as low, medium high based on salary range
+Less than 1000 less
+1000 to 2500 medium
+More than 2500 high
+ans)SELECT Sal  As Low
+   FROM Emp
+   WHERE SAL<(SELECT SAL
+              FROM Emp
+	      WHERE Sal=1000) 
+UNION
+SELECT Sal As MEDIUM 
+FROM Emp
+WHERE Sal=(SELECT SAL
+           FROM Emp
+	   WHERE Sal BETWEEN 1000 AND 2500) 
+UNION
+SELECT Sal As HIGH 
+FROM Emp
+WHERE Sal>(SELECT Sal
+           FROM Emp
+           WHERE Sal=2500);

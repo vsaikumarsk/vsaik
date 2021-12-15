@@ -1,0 +1,134 @@
+Write a query to list all the employees who are working as clerk
+ans) SELECT ename
+         FROM Emp
+         WHERE Dept='clerk';
+
+Write a query to list the employees who are working as clerks or managers
+ANS) SELECT ename
+           FROM Emp
+           WHERE Dept='clerk' or Dept='managers';
+Write a query to get the current date
+Ans)SELECT CAST(GETDATE() AS DATE);
+Write a query to list the employees whose salaries are within the range of 500 and 1000
+ANS) SELECT Ename 
+           FROM Emp
+           WHERE Sal BETWEEN 500 AND 1000;
+Write a query to list the employees who have joined in the month of December
+ANS) SELECT Ename 
+          FROM Emp
+         WHERE to_char(hire_date,'mon')='dec';
+Write a query to list the employees whose salaries are not within  the range of 1000 and 2500
+ans) SELECT Ename 
+         FROM Emp
+         WHERE Sal NOT BETWEEN 1000 AND 2500;
+Write a query who are getting 800, 950, 3000,5000
+ANS) SELECT Ename
+          FROM Emp
+          WHERE Sal in (800,950,3000,5000);
+To list all the employees whose names are having ‘L’ as second character 
+ANS)SELECT Ename
+         FROM Emp 
+         WHERE Ename Like '_L%';
+To list all the employees whose names are having ‘D’ as last character 
+ANS)SELECT Ename 
+         FROM Emp
+         WHERE Ename Like '%D';
+To list all the employees whose names are having just 5 characters as length? 
+ANS) SELECT Ename 
+          FROM Emp
+          WHERE Ename Like '_____';
+To list all the employees whose names are starting with ‘T’ and ending with ‘R’ 
+ANS) SELECT Ename 
+          FROM Emp
+          WHERE Ename like 'T%R';
+Display those employees who's name contains "A"?
+ANS) SELECT Ename
+           FROM Emp
+           WHERE Ename like '%a%';
+Display those employee who joined the company before 19th of the month?
+ANS) SELECT Ename
+           FROM Emp
+           WHERE To_char(hiredate,'DD')<'19';
+What is the employee number of 'James' 
+ANS) SELECT Empno
+           FROM Emp
+           WHERE Ename='james';
+What is the salary of 'king'?
+ANS)SELECT Sal
+         FROM Emp
+         WHERE Ename='king';
+Who is the President for organization?
+ANS) SELECT Ename
+          FROM Emp
+          WHERE job ='President';
+ List all details of all the managers?
+ans) SELECT *
+         FROM Emp
+         WHERE Job='managers';
+Give employee details for employees drawing commission?
+ANS) SELECT *
+           FROM Emp
+           WHERE job='drawing';
+List employees who joined before april-1981?
+ANS) SELECT Ename
+           FROM Emp
+           WHERE hiredate<('1981-4-1');
+What is the salary of following: 
+King, Blake, Ford, Smith
+ANS)SELECT Sal
+         FROM Emp
+         WHERE Ename in ('King','Blake',Ford','Smith');
+Who is drawing salary less than 3500
+ANS) SELECT Ename
+          FROM Emp
+          WHERE Sal<3500;
+List the details of all the clerks
+ANS) SELECT *
+           FROM Emp
+          WHERE Job='clerk';
+what is the annual salary for each the employee
+          
+if there is a hike in monthly salary by 20% for ford, what will be his annual Salary
+ANS) SELECT ((12*Sal)+((20%100)*sal)) as annualsalary
+           FROM Emp;
+
+
+
+What is the total salary for each department
+ANS)SELECT SUM(Sal),dept
+         FROM Emp
+         GROUP BY dept;
+         
+Who is drawing the lowest salary in dept 10
+ANS) SELECT MIN(SAL)
+           FROM Emp
+           WHERE deptno=10;
+
+What is the average salary for Managers
+ans) SELECT AVG(SAL)
+         FROM Emp
+         WHERE Job='Managers';
+What is the total salary for salesman
+ANS) SELECT SUM(Sal)
+          FROM Emp
+          WHERE Job='salesman';
+Which department is having the lowest average salary?
+How many persons are in each role
+ANS) SELECT Dept,COUNT(Ename) as numberofpersons
+           FROM (SELECT Ename,Dept
+                         FROM  Emp);
+What is the highest salary among analyst
+ANS) SELECT MAX(Sal)
+           FROM Emp
+           WHERE Job='analyst';
+What is the highest commission paid
+AND)SELECT MAX(commision)
+         FROM Emp;
+How many departments are there
+AND) SELECT COUNT(DEPT)
+           FROM emp;
+List the names in which 3rd  character is L
+ANS) SELECT Ename
+           FROM Emp
+           WHERE Ename Like  '__L%';
+
