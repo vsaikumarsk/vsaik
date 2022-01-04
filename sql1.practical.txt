@@ -1,0 +1,20 @@
+1)query:::
+
+SELECT FIRST_NAME,LAST_NAME,SALARY 
+FROM Worker_Details
+WHERE SALARY IN(
+                                      SELECT SALARY 
+	                    FROM Worker_Details
+	                    GROUP BY SALARY
+		  HAVING Count(SALARY)>1
+	                    )
+ORDER BY SALARY Asc;
+        
+2)query::
+
+SELECT w.FIRST_NAME,w.LAST_NAME,w.DEPARTMENT
+FROM Worker_Details w
+JOIN (SELECT MAX(SALARY) AS Highest,
+DEPARTMENT FROM Worker_Details
+GROUP BY DEPARTMENT) v
+ON w.DEPARTMENT = v.DEPARTMENT & w.SALARY = v.Highest;     
